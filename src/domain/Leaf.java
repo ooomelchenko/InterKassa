@@ -23,9 +23,16 @@ public class Leaf implements Comparable{
     }
 
     public Leaf() {
+        weight=0;
+        next=null;
     }
     public Leaf(int weight) {
         this.weight = weight;
+        next=null;
+    }
+    public Leaf(int weight, Leaf next) {
+        this.weight = weight;
+        this.next = next;
     }
 
     @Override

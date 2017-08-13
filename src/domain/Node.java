@@ -15,19 +15,20 @@ public class Node {
         rightNode = null;
         leftNode = null;
         leafList = new LeafListImpl();
+        name="unnamed";
     }
     public Node(String name) {
         this.name = name;
         leafList = new LeafListImpl();
     }
-    public Node(LeafListImpl leafList) {
+    public Node(LeafList leafList) {
         this.leafList = leafList;
     }
-    public Node(String name, LeafListImpl leafList) {
+    public Node(String name, LeafList leafList) {
         this.name = name;
         this.leafList = leafList;
     }
-    public Node(String name, Node rightNode, Node leftNode, LeafListImpl leafList) {
+    public Node(String name, Node rightNode, Node leftNode, LeafList leafList) {
         this.name=name;
         this.rightNode = rightNode;
         this.leftNode = leftNode;
