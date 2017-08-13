@@ -12,10 +12,7 @@ public class LeafListImpl implements LeafList {
     }
     public LeafListImpl(Leaf headLeaf) {
         this.headLeaf = headLeaf;
-    }
-    public LeafListImpl(Leaf headLeaf, Leaf lastLeaf) {
-        this.headLeaf = headLeaf;
-        this.lastLeaf = lastLeaf;
+        this.lastLeaf = headLeaf;
     }
 
     @Override
@@ -36,6 +33,9 @@ public class LeafListImpl implements LeafList {
     }
     @Override
     public void addFirstLeaf(Leaf leaf) {
+        if(leaf==null){
+            return;
+        }
         if (headLeaf != null) {
             leaf.setNext(headLeaf);
             headLeaf = leaf;
@@ -46,6 +46,9 @@ public class LeafListImpl implements LeafList {
     }
     @Override
     public void addLastLeaf(Leaf leaf) {
+        if(leaf==null){
+            return;
+        }
         if (headLeaf != null) {
             lastLeaf.setNext(leaf);
             lastLeaf = leaf;
@@ -54,6 +57,22 @@ public class LeafListImpl implements LeafList {
             lastLeaf = leaf;
         }
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LeafListImpl leafList = (LeafListImpl) o;
+
+        return (headLeaf != null ? headLeaf.equals(leafList.headLeaf) : leafList.headLeaf == null) && (lastLeaf != null ? lastLeaf.equals(leafList.lastLeaf) : leafList.lastLeaf == null);
+    }
+    @Override
+    public int hashCode() {
+        int result = headLeaf != null ? headLeaf.hashCode() : 0;
+        result = 31 * result + (lastLeaf != null ? lastLeaf.hashCode() : 0);
+        return result;
+    }
+
     @Override
     public int size() {
         if (headLeaf == null) {
@@ -69,25 +88,29 @@ public class LeafListImpl implements LeafList {
     }
     @Override
     public void sort() {
-        if (size() >= 2)
+        if (size() < 2)
+            return;
             for (int i = 0; i < size() - 1; i++) {
                 Leaf current = headLeaf;
                 Leaf prev = null;
                 while (current.hasNext()) {
-
                     Leaf next = current.getNext();
 
                     if (current.compareTo(next) == 1) {
+
                         if (prev != null) {
                             prev.setNext(next);
-                        } else headLeaf = next;
+                        } else
+                            headLeaf = next;
 
-                        current.setNext(next.getNext());
-                        next.setNext(current);
+                            current.setNext(next.getNext());
+                            next.setNext(current);
+
                     }
                     prev = current;
                     current = next;
                 }
+                lastLeaf=current;
             }
     }
     @Override
@@ -109,7 +132,9 @@ public class LeafListImpl implements LeafList {
         if (headLeaf == null) {
             return null;
         } else if (headLeaf.getWeight() > maxTotalWeight) {
-             new LeafListImpl(headLeaf, lastLeaf);
+            LeafListImpl l= new LeafListImpl(headLeaf);
+            l.setLastLeaf(lastLeaf);
+            return l;
         }
         else {
             Leaf current = headLeaf;
@@ -121,9 +146,13 @@ public class LeafListImpl implements LeafList {
 
                 if (maxTotalWeight < 0) {
                     Leaf newHeadLeaf = current.getNext();
+                    Leaf newLastLeaf = lastLeaf;
                     lastLeaf = current;
                     lastLeaf.setNext(null);
-                    return new LeafListImpl(newHeadLeaf, lastLeaf);
+
+                    LeafListImpl l= new LeafListImpl(newHeadLeaf);
+                    l.setLastLeaf(newLastLeaf);
+                    return l;
                 }
                 current = current.getNext();
             }
@@ -140,4 +169,5 @@ public class LeafListImpl implements LeafList {
             this.lastLeaf = leafList.getLastLeaf();
         }
     }
+
 }

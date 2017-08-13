@@ -8,7 +8,14 @@ public class MyTreeImpl implements MyTree {
     private int W;
 
     public MyTreeImpl() {
+        headNode=null;
+        W=0;
     }
+    public MyTreeImpl(int w) {
+        headNode=null;
+        W = w;
+    }
+
     public MyTreeImpl(Node headNode, int W) {
         this.headNode = headNode;
         this.W = W;
@@ -50,7 +57,7 @@ public class MyTreeImpl implements MyTree {
 
     }
     @Override
-    public void doTest() {
+    public void doTask() {
         manageLeafs(headNode, new LeafListImpl());
     }
     @Override
@@ -59,7 +66,6 @@ public class MyTreeImpl implements MyTree {
         curLeafList.joinList(residualLeafList);
         curLeafList.sort();
         LeafList offcutList = curLeafList.cutOverWeightList(W);
-
         if (node.hasRight()) {
             offcutList = manageLeafs(node.getRightNode(), offcutList);
         }
