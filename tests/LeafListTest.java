@@ -45,8 +45,6 @@ public class LeafListTest {
 
     @Test
     public void testAddFirstLeaf() {
-        Leaf leaf1 = new Leaf(1);
-        Leaf leaf2 = new Leaf(2);
 
         leafList.addFirstLeaf(leaf1);
         leafList.addFirstLeaf(leaf2);
@@ -56,8 +54,6 @@ public class LeafListTest {
 
     @Test
     public void testAddLastLeaf() {
-        Leaf leaf1 = new Leaf(1);
-        Leaf leaf2 = new Leaf(2);
 
         leafList.addLastLeaf(leaf1);
         leafList.addLastLeaf(leaf2);
@@ -67,21 +63,17 @@ public class LeafListTest {
 
     @Test
     public void testJoinList() {
-        Leaf leaf1 = new Leaf(1);
-        Leaf leaf2 = new Leaf(2);
-        Leaf leaf3 = new Leaf(3);
 
         LeafList leafList1 = new LeafListImpl(leaf1);
         leafList1.addLastLeaf(leaf2);
         LeafList leafList2 = new LeafListImpl(leaf3);
         leafList1.joinList(leafList2);
-        LeafList leafList3 = new LeafListImpl();
 
-        leafList3.addLastLeaf(leaf1);
-        leafList3.addLastLeaf(leaf2);
-        leafList3.addLastLeaf(leaf3);
+        leafList.addLastLeaf(leaf1);
+        leafList.addLastLeaf(leaf2);
+        leafList.addLastLeaf(leaf3);
 
-        assertEquals(leafList3, leafList1);
+        assertEquals(leafList, leafList1);
     }
 
     @Test
