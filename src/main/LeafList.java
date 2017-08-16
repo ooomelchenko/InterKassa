@@ -4,6 +4,15 @@ import domain.Leaf;
 
 public interface LeafList {
 
+    static LeafList getRandomList(int size, int maxLeafWeight){
+        LeafList leafList = new LeafListImpl();
+        while(size>0){
+            leafList.addLastLeaf(new Leaf(1 + (int)(Math.random() * ((maxLeafWeight - 1) + 1))));
+            size--;
+        }
+        return leafList;
+    }
+
     Leaf getHeadLeaf();
 
     void setHeadLeaf(Leaf headLeaf);
@@ -16,7 +25,11 @@ public interface LeafList {
 
     void addLastLeaf(Leaf leaf);
 
+    boolean isEmpty();
+
     int size();
+
+    int totalWeight();
 
     void sort();
 

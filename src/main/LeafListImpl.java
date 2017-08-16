@@ -72,6 +72,10 @@ public class LeafListImpl implements LeafList {
         result = 31 * result + (lastLeaf != null ? lastLeaf.hashCode() : 0);
         return result;
     }
+    @Override
+    public boolean isEmpty(){
+        return headLeaf==null;
+    }
 
     @Override
     public int size() {
@@ -85,6 +89,19 @@ public class LeafListImpl implements LeafList {
             size++;
         }
         return size;
+    }
+    @Override
+    public int totalWeight() {
+        if (headLeaf == null) {
+            return 0;
+        }
+        int sw = headLeaf.getWeight();
+        Leaf last = headLeaf;
+        while (last.hasNext()) {
+            last = last.getNext();
+            sw += last.getWeight();
+        }
+        return sw;
     }
     @Override
     public void sort() {

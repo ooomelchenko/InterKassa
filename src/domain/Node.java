@@ -74,4 +74,8 @@ public class Node {
     public String toString() {
         return name + " {leafList: " + leafList + '}';
     }
+
+    public int getTotalWeightOfLeafs(){
+       return leafList.totalWeight();
+    }
 }

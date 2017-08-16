@@ -15,7 +15,6 @@ public class MyTreeImpl implements MyTree {
         headNode=null;
         W = w;
     }
-
     public MyTreeImpl(Node headNode, int W) {
         this.headNode = headNode;
         this.W = W;
@@ -54,7 +53,6 @@ public class MyTreeImpl implements MyTree {
         if(node.hasLeft()){
             print(node.getLeftNode());
         }
-
     }
     @Override
     public void doTask() {
@@ -74,5 +72,4 @@ public class MyTreeImpl implements MyTree {
         }
         return offcutList;
     }
-
 }
