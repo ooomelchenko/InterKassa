@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LeafListTest {
     private LeafList leafList;
-    Leaf leaf1;
-    Leaf leaf2;
-    Leaf leaf3;
+    private Leaf leaf1;
+    private Leaf leaf2;
+    private Leaf leaf3;
 
     @BeforeEach
     void init() {
@@ -26,6 +26,14 @@ public class LeafListTest {
         leafList.addLastLeaf(leaf2);
         leafList.addLastLeaf(leaf3);
         assertEquals(3, leafList.size());
+    }
+
+    @Test
+    public void testTotalWeight() {
+        leafList.addLastLeaf(leaf1);
+        leafList.addLastLeaf(leaf2);
+        leafList.addLastLeaf(leaf3);
+        assertEquals(6, leafList.totalWeight());
     }
 
     @Test

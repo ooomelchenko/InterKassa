@@ -1,7 +1,5 @@
-import domain.Leaf;
 import domain.Node;
 import main.LeafList;
-import main.LeafListImpl;
 import main.MyTree;
 import main.MyTreeImpl;
 
@@ -9,42 +7,43 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LeafList leafList1 = new LeafListImpl();
-        leafList1.addLastLeaf(new Leaf(6));
-        leafList1.addLastLeaf(new Leaf(2));
-        leafList1.addLastLeaf(new Leaf(4));
-        leafList1.addLastLeaf(new Leaf(8));
-        leafList1.addLastLeaf(new Leaf(10));
-        leafList1.addLastLeaf(new Leaf(14));
-        leafList1.addLastLeaf(new Leaf(12));
-        leafList1.addLastLeaf(new Leaf(16));
+        Node head= new Node("head", LeafList.getRandomList(3, 5));
+        Node a= new Node("a");
+        Node a1= new Node("a1", LeafList.getRandomList(3, 5));
+        Node a2= new Node("a2", LeafList.getRandomList(3, 10));
+        Node a3= new Node("a3");
+        Node b= new Node("b", LeafList.getRandomList(3, 5));
+        Node b1= new Node("b1", LeafList.getRandomList(3, 5));
+        Node b2= new Node("b2", LeafList.getRandomList(3, 5));
+        Node b3= new Node("b3");
+        Node c= new Node("c", LeafList.getRandomList(3, 5));
+        Node c1= new Node("c1", LeafList.getRandomList(3, 3));
+        Node c2= new Node("c2", LeafList.getRandomList(3, 5));
+        Node c3= new Node("c3");
 
-        LeafList leafList2 = new LeafListImpl();
-        leafList2.addLastLeaf(new Leaf(7));
-        leafList2.addLastLeaf(new Leaf(1));
-        leafList2.addLastLeaf(new Leaf(5));
-        leafList2.addLastLeaf(new Leaf(13));
-        leafList2.addLastLeaf(new Leaf(3));
-        leafList2.addLastLeaf(new Leaf(9));
+        head.setLeftNode(a);
+        a.setRightNode(b);
+        b.setRightNode(c);
 
-        Node headNode=new Node("head", leafList1);
-        Node node2=new Node("n2");
-        Node node3=new Node("n3", leafList2);
-        Node node4=new Node("n4");
-        Node node5=new Node("n5");
-        Node node6=new Node("n6");
+        a.setLeftNode(a1);
+        a1.setRightNode(a2);
+        a2.setRightNode(a3);
 
-        headNode.setLeftNode(node2);
-        node2.setRightNode(node3);
-        node2.setLeftNode(node4);
-        node4.setLeftNode(node5);
-        node4.setRightNode(node6);
+        b.setLeftNode(b1);
+        b1.setRightNode(b2);
+        b2.setRightNode(b3);
 
-        MyTree myTree = new MyTreeImpl(headNode, 20);
+        c.setLeftNode(c1);
+        c1.setRightNode(c2);
+        c2.setRightNode(c3);
 
-        myTree.doTask();
-
+        MyTree myTree = new MyTreeImpl(head, 5);
+        myTree.setHeadNode(head);
         myTree.printTree();
+        myTree.doTask();
+        System.out.println("-------------- After sort ----------------");
+        myTree.printTree();
+
 
     }
 }
