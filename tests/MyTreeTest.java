@@ -17,6 +17,7 @@ public class MyTreeTest {
     private Leaf leaf3 ;
     private Leaf leaf4 ;
     private Leaf leaf5 ;
+    private int size;
 
     @BeforeEach
     void init() {
@@ -29,6 +30,7 @@ public class MyTreeTest {
         leafList = new LeafListImpl();
 
         myTree = new MyTreeImpl(W);
+        size=0;
 
     }
 
@@ -84,8 +86,13 @@ public class MyTreeTest {
 
         myTree.setHeadNode(head);
         myTree.doTask();
+
         checkSort(myTree.getHeadNode());
+
         checkWeight(myTree.getHeadNode());
+
+        checkTreeSize(myTree.getHeadNode());
+        assertEquals(13, size);
     }
 
     //проверка суммы весов листьев каждого нода на предмет превышения заданной константы W
@@ -116,6 +123,17 @@ public class MyTreeTest {
         }
         if (node.hasLeft()) {
             checkSort(node.getLeftNode());
+        }
+    }
+
+    //проверка разера дерева
+    private void checkTreeSize(Node node){
+         size ++;
+        if (node.hasRight()) {
+            checkTreeSize(node.getRightNode());
+        }
+        if (node.hasLeft()) {
+            checkTreeSize(node.getLeftNode());
         }
     }
 }
