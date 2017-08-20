@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MyTreeTest {
     private MyTree myTree;
     private LeafList leafList;
+    private Node head;
     private int W;
     private Leaf leaf1 ;
     private Leaf leaf2 ;
@@ -28,8 +29,8 @@ public class MyTreeTest {
         leaf5 = new Leaf(5);
         W=5;
         leafList = new LeafListImpl();
-
-        myTree = new MyTreeImpl(W);
+        head= new Node("head");
+        myTree = new MyTreeImpl(head, W);
         size=0;
 
     }
@@ -54,7 +55,7 @@ public class MyTreeTest {
     }
     @Test
     public void testMyTree(){
-        Node head= new Node("head");
+
         Node a= new Node("a", LeafList.getRandomList(3, 5));
         Node a1= new Node("a1", LeafList.getRandomList(3, 10));
         Node a2= new Node("a2", LeafList.getRandomList(3, 5));

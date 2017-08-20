@@ -2,22 +2,24 @@ package main;
 
 import domain.Node;
 
-public class MyTreeImpl implements MyTree {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+
+public class MyTreeImpl implements MyTree, Iterator {
 
     private Node headNode;
     private int W;
 
-    public MyTreeImpl() {
-        headNode=null;
-        W=0;
-    }
-    public MyTreeImpl(int w) {
-        headNode=null;
-        W = w;
-    }
+    private Stack<Node> fringe = new Stack<>( );
+
     public MyTreeImpl(Node headNode, int W) {
         this.headNode = headNode;
         this.W = W;
+
+        if (headNode != null) {
+            fringe.push (headNode);
+        }
     }
 
     @Override
@@ -71,5 +73,26 @@ public class MyTreeImpl implements MyTree {
             offcutList = manageLeafs(node.getLeftNode(), offcutList);
         }
         return offcutList;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !fringe.empty ( );
+    }
+
+    @Override
+    public Node next() {
+        if (!hasNext ( )) {
+            throw new NoSuchElementException("tree ran out of elements");
+        }
+        Node node = fringe.pop ( );
+        if (node.getLeftNode() != null) {
+            fringe.push (node.getLeftNode());
+        }
+        if (node.getRightNode() != null) {
+            fringe.push (node.getRightNode());
+        }
+
+        return node;
     }
 }
