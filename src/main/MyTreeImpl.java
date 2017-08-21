@@ -86,13 +86,14 @@ public class MyTreeImpl implements MyTree, Iterator {
             throw new NoSuchElementException("tree ran out of elements");
         }
         Node node = fringe.pop ( );
-        if (node.getLeftNode() != null) {
-            fringe.push (node.getLeftNode());
-        }
-        if (node.getRightNode() != null) {
+
+        if (node.hasRight()) {
             fringe.push (node.getRightNode());
         }
-
+        if (node.hasLeft()) {
+            fringe.push (node.getLeftNode());
+        }
         return node;
     }
+
 }

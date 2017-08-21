@@ -2,17 +2,28 @@ package main;
 
 import domain.Leaf;
 
-public class LeafListImpl implements LeafList {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+
+public class LeafListImpl implements LeafList, Iterator {
 
     private Leaf headLeaf;
     private Leaf lastLeaf;
 
+    private Stack<Leaf> fringe = new Stack<>( );
+
     public LeafListImpl() {
-        headLeaf = null;
+        this.headLeaf = null;
+        this.lastLeaf = null;
     }
     public LeafListImpl(Leaf headLeaf) {
         this.headLeaf = headLeaf;
         this.lastLeaf = headLeaf;
+
+        if (headLeaf != null) {
+            fringe.push (headLeaf);
+        }
     }
 
     @Override
@@ -151,6 +162,8 @@ public class LeafListImpl implements LeafList {
         } else if (headLeaf.getWeight() > maxTotalWeight) {
             LeafListImpl l= new LeafListImpl(headLeaf);
             l.setLastLeaf(lastLeaf);
+            headLeaf=null;
+            lastLeaf=null;
             return l;
         }
         else {
@@ -187,4 +200,21 @@ public class LeafListImpl implements LeafList {
         }
     }
 
+    @Override
+    public boolean hasNext() {
+        return !fringe.empty ( );
+    }
+
+    @Override
+    public Leaf next() {
+        if (!hasNext ( )) {
+            throw new NoSuchElementException("list ran out of elements");
+        }
+        Leaf leaf = fringe.pop ( );
+
+        if (leaf.getNext() != null) {
+            fringe.push (leaf.getNext());
+        }
+        return leaf;
+    }
 }

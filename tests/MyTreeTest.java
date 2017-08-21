@@ -2,14 +2,15 @@ import domain.Leaf;
 import domain.Node;
 import main.LeafList;
 import main.LeafListImpl;
-import main.MyTree;
 import main.MyTreeImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MyTreeTest {
-    private MyTree myTree;
+    private MyTreeImpl myTree;
     private LeafList leafList;
     private Node head;
     private int W;
@@ -88,11 +89,13 @@ public class MyTreeTest {
         myTree.setHeadNode(head);
         myTree.doTask();
 
-        checkSort(myTree.getHeadNode());
+        while(myTree.hasNext()){
+            Node current = myTree.next();
+            checkSort(current);
+            checkWeight(current);
+            size++;
+        }
 
-        checkWeight(myTree.getHeadNode());
-
-        checkTreeSize(myTree.getHeadNode());
         assertEquals(13, size);
     }
 
@@ -100,17 +103,10 @@ public class MyTreeTest {
     private void checkWeight(Node node){
         int totalWeight =node.getTotalWeightOfLeafs();
         assertTrue(totalWeight<=W);
-        if (node.hasRight()) {
-            checkWeight(node.getRightNode());
-        }
-        if (node.hasLeft()) {
-            checkWeight(node.getLeftNode());
-        }
     }
 
     //проверка листьев каждого узла на предмет отсортированности по весу
     private void checkSort(Node node){
-
         LeafList leafList = node.getLeafList();
         if(!leafList.isEmpty()){
             Leaf leaf = leafList.getHeadLeaf();
@@ -119,22 +115,6 @@ public class MyTreeTest {
                 leaf=leaf.getNext();
             }
         }
-        if (node.hasRight()) {
-            checkSort(node.getRightNode());
-        }
-        if (node.hasLeft()) {
-            checkSort(node.getLeftNode());
-        }
     }
 
-    //проверка разера дерева
-    private void checkTreeSize(Node node){
-         size ++;
-        if (node.hasRight()) {
-            checkTreeSize(node.getRightNode());
-        }
-        if (node.hasLeft()) {
-            checkTreeSize(node.getLeftNode());
-        }
-    }
 }

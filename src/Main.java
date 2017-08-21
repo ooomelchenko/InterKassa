@@ -1,13 +1,12 @@
 import domain.Node;
 import main.LeafList;
-import main.MyTree;
 import main.MyTreeImpl;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Node head= new Node("head", LeafList.getRandomList(3, 5));
+        Node head= new Node("head", LeafList.getRandomList(3, 10));
         Node a= new Node("a");
         Node a1= new Node("a1", LeafList.getRandomList(3, 5));
         Node a2= new Node("a2", LeafList.getRandomList(3, 10));
@@ -37,13 +36,13 @@ public class Main {
         c1.setRightNode(c2);
         c2.setRightNode(c3);
 
-        MyTree myTree = new MyTreeImpl(head, 5);
+        MyTreeImpl myTree = new MyTreeImpl(head, 5);
         myTree.setHeadNode(head);
-        myTree.printTree();
         myTree.doTask();
-        System.out.println("-------------- After sort ----------------");
-        myTree.printTree();
 
-
+        System.out.println("-------------- After Sort ----------------");
+        while(myTree.hasNext()){
+            System.out.println(myTree.next());
+        }
     }
 }
