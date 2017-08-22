@@ -53,6 +53,7 @@ public class LeafListImpl implements LeafList, Iterator {
         } else {
             headLeaf = leaf;
             lastLeaf = leaf;
+            fringe.push (headLeaf);
         }
     }
     @Override
@@ -66,6 +67,7 @@ public class LeafListImpl implements LeafList, Iterator {
         } else {
             headLeaf = leaf;
             lastLeaf = leaf;
+            fringe.push (headLeaf);
         }
     }
     @Override

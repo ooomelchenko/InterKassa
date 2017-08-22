@@ -41,8 +41,6 @@ public class Main {
         myTree.doTask();
 
         System.out.println("-------------- After Sort ----------------");
-        while(myTree.hasNext()){
-            System.out.println(myTree.next());
-        }
+        myTree.printTree();
     }
 }

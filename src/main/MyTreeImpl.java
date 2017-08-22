@@ -49,11 +49,11 @@ public class MyTreeImpl implements MyTree, Iterator {
     @Override
     public void print(Node node) {
         System.out.println(node.toString());
-        if(node.hasRight()){
-            print(node.getRightNode());
-        }
         if(node.hasLeft()){
             print(node.getLeftNode());
+        }
+        if(node.hasRight()){
+            print(node.getRightNode());
         }
     }
     @Override
