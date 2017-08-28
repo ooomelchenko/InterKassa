@@ -66,11 +66,11 @@ public class MyTreeImpl implements MyTree, Iterator {
         curLeafList.joinList(residualLeafList);
         curLeafList.sort();
         LeafList offcutList = curLeafList.cutOverWeightList(W);
-        if (node.hasRight()) {
-            offcutList = manageLeafs(node.getRightNode(), offcutList);
-        }
         if (node.hasLeft()) {
             offcutList = manageLeafs(node.getLeftNode(), offcutList);
+        }
+        if (node.hasRight()) {
+            offcutList = manageLeafs(node.getRightNode(), offcutList);
         }
         return offcutList;
     }
